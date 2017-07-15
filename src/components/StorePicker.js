@@ -9,14 +9,13 @@ class StorePicker extends React.Component {     //Capital classname so can be us
   }
 
 
-  goToStore(event) {  //event is all of the information from form
+  goToStore(event) {  //event is the entire form object
     event.preventDefault();
-    console.log("you changed the url");
-    console.log(this);
-    console.log(this.storeInput.value)
     //first we're going to grab hold of the text
+    const storeId = this.storeInput.value;
     //secondly we're going to transition from / to /store/:storeId
-  }
+    this.context.router.transitionTo(`store/${storeId}`)
+    }
 
 
   //render methods are bound to the class, therefore can use this in on submit which is grabbing StorePicker
@@ -28,7 +27,13 @@ class StorePicker extends React.Component {     //Capital classname so can be us
       </form> 
       )
     }
-  }   
+   
+  }  
+
+  StorePicker.contextTypes = {       //this makes router available to StorePicker via context
+    router: React.PropTypes.object
+    }
+
 
 
 export default StorePicker;
