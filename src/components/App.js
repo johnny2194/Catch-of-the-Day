@@ -4,7 +4,7 @@ import Header from './Header'
 import Order from './Order'
 import Inventory from './Inventory'
 import SampleFishes from '../sample-fishes'
-import Fish from './Fish'
+import FishList from './FishList'
 
 class App extends React.Component {
 
@@ -33,14 +33,19 @@ class App extends React.Component {
     this.setState({fishes: newFishes})
   }
 
+  // var commentNodes = this.props.data.map(function(comment) {
+  //   return (
+  //     <Comment author={comment.author} key={comment.id}>
+  //       {comment.text}
+  //     </Comment>
+  //   )
+
   render() {
     return(
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="Fresh Seafood Market"/>
-          <ul className="list-of-fishes">
-            <Fish />
-          </ul>
+          <FishList fishes={this.state.fishes}/>
         </div>
         <Order />
         <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}/>
