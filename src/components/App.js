@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './Header'
 import Order from './Order'
 import Inventory from './Inventory'
+import SampleFishes from '../sample-fishes'
 
 class App extends React.Component {
 
@@ -10,6 +11,7 @@ class App extends React.Component {
     super();
 
     this.addFish = this.addFish.bind(this);
+    this.loadSampleFishes = this.loadSampleFishes.bind(this);
 
     this.state = {
       fishes:[],
@@ -19,11 +21,16 @@ class App extends React.Component {
     }
 
   addFish(fish){
-    
+
     fish.id = Date.now();
     let newFishes = this.state.fishes.concat([fish]);
     this.setState({fishes: newFishes});
-  };
+  }
+
+  loadSampleFishes() {
+    let newFishes = this.state.fishes.concat(SampleFishes);
+    this.setState({fishes: newFishes})
+  }
 
   render() {
     return(
@@ -32,7 +39,7 @@ class App extends React.Component {
           <Header tagline="Fresh Seafood Market"/>
         </div>
         <Order />
-        <Inventory addFish={this.addFish}/>
+        <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}/>
       </div>
     )
   } 
