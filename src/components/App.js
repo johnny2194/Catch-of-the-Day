@@ -13,6 +13,7 @@ class App extends React.Component {
 
     this.addFish = this.addFish.bind(this);
     this.loadSampleFishes = this.loadSampleFishes.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
 
     this.state = {
       fishes:[],
@@ -26,6 +27,15 @@ class App extends React.Component {
     fish.id = Date.now();
     let newFishes = this.state.fishes.concat([fish]);
     this.setState({fishes: newFishes});
+  }
+
+  addToOrder(name){
+    //take a copy of our state
+    const order = {...this.state.order}
+    //update or add the new number of fish
+    order[name] = order[name] + 1 || 1
+    //update our state
+    this.setState({order: order})
   }
 
   loadSampleFishes() {
@@ -45,7 +55,7 @@ class App extends React.Component {
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="Fresh Seafood Market"/>
-          <FishList fishes={this.state.fishes}/>
+          <FishList fishes={this.state.fishes} addToOrder={this.addToOrder}/>
         </div>
         <Order />
         <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}/>
